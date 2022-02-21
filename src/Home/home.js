@@ -1,23 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {nanoid} from 'nanoid'
-import ErrorMessage from '../error-message';
+import {collection, addDoc} from 'firebase/firestore';
+import {db} from '../firebase/firebase-config';
 import validateUrl from '../validate-url';
+import ErrorMessage from '../error-message';
+import './home-styles.css';
+
+
 
 const Home = () => {
     const [newUrl, setNewUrl] = useState('');
     const [validationError, setvalidationError] = useState(false);
+    const urlsCollectionRef = collection(db, "urls");
 
     function handleChange(event) {
         setNewUrl(event.target.value)
     }
+
 
     async function onSubmit(event) {
         event.preventDefault();
 
         // if (validateUrl(url)) {
         //     setvalidationError(false);
-            let id = nanoid();
-            // await db.collection("urls").add({
+        // await db.collection("urls").add({
             //     id,
             //     longUrl: newUrl,
             //     shortUrl: '',
@@ -26,6 +31,12 @@ const Home = () => {
         // } else {
         //     setvalidationError(true);
         // }
+
+
+        await addDoc(urlsCollectionRef, {
+            longUrl: newUrl
+            // shortUrl: `https://tiny.url/${randomId}`
+        })
     }
 
     function handleClear() {
