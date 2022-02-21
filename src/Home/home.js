@@ -4,7 +4,7 @@ import {db} from '../firebase/firebase-config';
 import validateUrl from '../validate-url';
 import ErrorMessage from '../error-message';
 import './home-styles.css';
-
+import { nanoid } from 'nanoid'
 
 
 const Home = () => {
@@ -16,7 +16,12 @@ const Home = () => {
         setNewUrl(event.target.value)
     }
 
-
+    let randomId;
+    function createRandomId () {
+        randomId = nanoid(8)
+    }
+    createRandomId();
+    
     async function onSubmit(event) {
         event.preventDefault();
 
@@ -32,10 +37,10 @@ const Home = () => {
         //     setvalidationError(true);
         // }
 
-
+        console.log(`https://tiny.url/${randomId}`);
         await addDoc(urlsCollectionRef, {
-            longUrl: newUrl
-            // shortUrl: `https://tiny.url/${randomId}`
+            longUrl: newUrl,
+            shortUrl: `https://tiny.url/${randomId}`
         })
     }
 
