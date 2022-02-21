@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {nanoid} from 'nanoid'
-import ErrorMessage from './error-message';
-import validateUrl from './validate-url';
+import ErrorMessage from '../error-message';
+import validateUrl from '../validate-url';
 
 const Home = () => {
     const [newUrl, setNewUrl] = useState('');
@@ -33,7 +33,7 @@ const Home = () => {
     }
 
     return (
-        <>
+        <div className="home">
             {validationError && <ErrorMessage />}
             <form>
                 <h3>Enter url to shorten</h3>
@@ -41,7 +41,7 @@ const Home = () => {
                 <button type="submit" onClick={onSubmit}>Submit</button>
                 <button type="button" onClick={handleClear}>Clear</button>
             </form>
-        </>
+        </div>
     )
 
 }

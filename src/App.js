@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from './home';
+import Sidebar from './Sidebar/sidebar';
+import Home from './Home/home';
 import MyUrls from './MyUrls/my-urls';
 import {db} from './firebase/firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <Sidebar />
       <BrowserRouter>
         <Routes>
             <Route exact path="/" element={<Home />} />
