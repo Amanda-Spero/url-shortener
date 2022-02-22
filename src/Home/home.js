@@ -20,28 +20,21 @@ const Home = () => {
     function createRandomId () {
         randomId = nanoid(8)
     }
-    createRandomId();
     
     async function onSubmit(event) {
         event.preventDefault();
-
-        // if (validateUrl(url)) {
-        //     setvalidationError(false);
-        // await db.collection("urls").add({
-            //     id,
-            //     longUrl: newUrl,
-            //     shortUrl: '',
-            //     prettyUrl: ''
-            // });
-        // } else {
-        //     setvalidationError(true);
-        // }
-
-        console.log(`https://tiny.url/${randomId}`);
-        await addDoc(urlsCollectionRef, {
-            longUrl: newUrl,
-            shortUrl: `https://tiny.url/${randomId}`
-        })
+        let isValid = validateUrl(newUrl);
+        console.log(isValid)
+        if (validateUrl(newUrl)) {
+            createRandomId();
+            setvalidationError(false);
+            await addDoc(urlsCollectionRef, {
+                longUrl: newUrl,
+                shortUrl: `https://tiny.url/${randomId}`
+            })
+        } else {
+            setvalidationError(true);
+        }
     }
 
     function handleClear() {

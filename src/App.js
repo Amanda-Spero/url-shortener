@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Sidebar from './Sidebar/sidebar';
+import Sidebar from './NavSidebar/nav-sidebar';
+import EditUrlSidebar from './EditSidebar/edit-url-sidebar';
 import Home from './Home/home';
 import MyUrls from './MyUrls/my-urls';
 import {db} from './firebase/firebase-config';
@@ -9,6 +10,7 @@ import './App.css';
 
 function App() {
   const [urlList, setUrlList] = useState([]);
+  const [editSidebarActive, setEditSidebarActive] = useState(false);
   const urlsCollectionRef = collection(db, "urls");
 
   useEffect(() => {
@@ -32,9 +34,10 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/my-lists" element={<MyUrls urlList={urlList} />} />
+            <Route path="/my-lists" element={<MyUrls urlList={urlList} setEditSidebarActive={setEditSidebarActive} />} />
         </Routes>
       </BrowserRouter>
+      {editSidebarActive && <EditUrlSidebar editSidebarActive={editSidebarActive}/>}
     </div>
   );
 }
