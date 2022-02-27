@@ -39,15 +39,15 @@
   padding: 10px
 }
 
-
 .url-input {
   width: 80%;
+  margin: 5px 0 20px;
 }
 
 .bottom-button-container {
   margin: 20px;
 }
 
-.bottom-button-container button{
+.bottom-button-container button {
   margin: 10px
 }

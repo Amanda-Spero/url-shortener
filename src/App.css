@@ -6,6 +6,7 @@
 .App {
   text-align: center;
   z-index: 1;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .App-logo {
@@ -34,7 +35,16 @@
   color: #61dafb;
 }
 
+input, textarea {
+  border: gray solid 2px;
+  background: #f8f6f2;
+  border-radius: 5px
+}
 
+button {
+  background: #d0ede6;
+  border-radius: 5px;
+}
 
 @keyframes App-logo-spin {
   from {

@@ -4,7 +4,7 @@ const ErrorMessage = () => {
 
     return (
         <>
-            <div>Oh Snap! That's not a valid url.</div>
+            <div>Oh Snap! That's not a valid url</div>
         </>
     )
 

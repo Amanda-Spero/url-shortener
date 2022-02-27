@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {collection, addDoc} from 'firebase/firestore';
 import {db} from '../firebase/firebase-config';
+import {nanoid} from 'nanoid'
 import validateUrl from '../validate-url';
 import ErrorMessage from '../error-message';
 import './home-styles.css';
-import { nanoid } from 'nanoid'
-
 
 const Home = () => {
     const [newUrl, setNewUrl] = useState('');
@@ -36,24 +35,26 @@ const Home = () => {
             setNewUrl('');
         } else {
             setvalidationError(true);
-            alert('error')
         }
     }
 
     function handleClear() {
         setNewUrl('');
+        setvalidationError(false);
     }
 
     return (
-        <div className="home">
-            {validationError && <ErrorMessage />}
-            <form>
-                <h3>Enter url to shorten</h3>
-                <input type="text" id="url-input" value={newUrl} onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit}>Submit</button>
-                <button type="button" onClick={handleClear}>Clear</button>
-            </form>
-        </div>
+        <>
+            <h3>Enter the URL to Shorten</h3>
+                <form className="shorten-link-form">
+                    <input type="text" value={newUrl} onChange={handleChange} />
+                    <div className="shorten-button-container">
+                        <button type="submit" onClick={handleSubmit}>Submit</button>
+                        <button type="button" onClick={handleClear}>Clear</button>
+                    </div>
+                </form>
+                {validationError && <ErrorMessage />}
+        </>
     )
 
 }

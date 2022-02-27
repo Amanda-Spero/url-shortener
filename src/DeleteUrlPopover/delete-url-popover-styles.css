@@ -1,0 +1,54 @@
+.edit-url-popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 300ms ease-in-out;
+    z-index: 10;
+    background: #fff;
+    border: black solid 1px;
+    border-radius: 4px;
+  }
+  
+  .edit-url-popover.active {
+    transform: translate(-50%, -50%) scale(1);
+  
+  }
+  
+  .edit-url-popover-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: black solid 1px;
+  
+  }
+  
+  .edit-url-popover-header .title {
+    display: flex;
+  
+  }
+  
+  .edit-url-popover-header .close-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  .edit-url-popover-body {
+    font-weight: bold;
+    padding: 10px
+  }
+  
+  .url-input {
+    width: 80%;
+    margin: 5px 0 20px;
+  }
+  
+  .bottom-button-container {
+    margin: 20px;
+  }
+  
+  .bottom-button-container button {
+    margin: 10px
+  }
+  

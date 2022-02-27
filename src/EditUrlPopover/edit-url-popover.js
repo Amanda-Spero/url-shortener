@@ -1,19 +1,16 @@
-import React, {useRef, useState} from 'react';
-import {deleteDoc, doc, updateDoc} from "firebase/firestore";
+import React, {useState} from 'react';
+import {doc, updateDoc} from "firebase/firestore";
 import {db} from '../firebase/firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
 import {RiCloseLine} from "react-icons/ri";
 import './edit-url-popover-styles.css';
 
-const EditUrlSidebar = ({id, editSidebarActive, setEditSidebarActive, setUrlList, editPopoverRef}) => {
-    const [urlName, setUrlName] = useState('');
-    const [prettyUrl, setPrettyUrl] = useState('');
-    const [memo, setMemo] = useState('');
-    const urlsDocRef = doc(db, "urls", id);
+const EditUrlSidebar = ({url, editSidebarActive, setEditSidebarActive, setUrlList, editPopoverRef}) => {
+    const [newUrlName, setNewUrlName] = useState('');
+    const [newShortUrl, setNewShortUrl] = useState('');
+    const [newMemo, setNewMemo] = useState('');
+    const urlsDocRef = doc(db, "urls", url.id);
     const urlsCollectionRef = collection(db, "urls");
-
-    // let sidebarTransitionClass = editSidebarActive ? 'sidebar-transition-enter' : '';
-    // let activeClass = editSidebarActive ? 'active' : '';
 
     async function refreshUrlList() {
         let data;
@@ -30,38 +27,34 @@ const EditUrlSidebar = ({id, editSidebarActive, setEditSidebarActive, setUrlList
     }
 
     function handleUrlNameChange(event) {
-        setUrlName(event.target.value)
+        setNewUrlName(event.target.value)
     }
 
-    function handlePrettuUrlChange(event) {
-        setPrettyUrl(event.target.value)
+    function handleNewUrlChange(event) {
+        setNewShortUrl(event.target.value)
     }
 
     function handleMemoChange(event) {
-        setMemo(event.target.value)
+        setNewMemo(event.target.value)
     }
 
     async function handleSubmit(event) {
         event.preventDefault();
-        await updateDoc(urlsDocRef, {
-            urlName,
-            prettyUrl,
-            memo
-        });
 
+        await updateDoc(urlsDocRef, {
+            urlName: newUrlName || url.urlName,
+            shortUrl: newShortUrl || url.shortUrl,
+            memo: newMemo || url.memo
+        });
+        setEditSidebarActive(false);
         refreshUrlList();
     }
 
-    async function handleDelete(event) {
-        event.preventDefault();
-        await deleteDoc((urlsDocRef));
 
-    }
-
-    function handleClear(field) {
-        setUrlName('');
-        setPrettyUrl('');
-        setMemo('');
+    function handleClear() {
+        setNewUrlName('');
+        setNewShortUrl('');
+        setNewMemo('');
     }
 
     function handleClose() {
@@ -78,16 +71,16 @@ const EditUrlSidebar = ({id, editSidebarActive, setEditSidebarActive, setUrlList
             </div>
             <div className="edit-url-popover-body">
                 <form>
-                    <div>Name this Url</div>
-                    <input type="text" className="url-input" value={urlName} onChange={handleUrlNameChange} />
-                    <div>Create Pretty Url</div>
-                    <input type="text" className="url-input" value={prettyUrl} onChange={handlePrettuUrlChange} />
+                    <div>Name Your URL</div>
+                    <input type="text" className="url-input" value={newUrlName} onChange={handleUrlNameChange} />
+                    <div>Customize Your Itty Bitty Url</div>
+                    <input type="text" className="url-input" value={newShortUrl} onChange={handleNewUrlChange} />
                     <div>Add a Memo</div>
-                    <textarea rows="4" cols="50" className="url-input memo" value={memo} onChange={handleMemoChange} />
+                    <textarea rows="4" cols="50" className="url-input memo" value={newMemo} onChange={handleMemoChange} />
                     <div className="bottom-button-container">
                         <button type="submit" onClick={handleSubmit}>Submit</button>
                         <button type="button" onClick={handleClear}>Clear</button>
-                        <button type="button" onClick={handleDelete}>Delete This URL</button>
+                        {/* <button type="button" onClick={handleDelete}>Delete This URL</button> */}
                     </div>
                 </form>
                 <div></div>

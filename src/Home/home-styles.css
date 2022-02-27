@@ -1,4 +1,12 @@
-.home {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
+.shorten-link-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 50%;
+    justify-content: center;
 }
+
+.shorten-button-container button {
+    margin: 10px;
+}
+

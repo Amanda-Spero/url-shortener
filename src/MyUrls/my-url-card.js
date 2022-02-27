@@ -1,11 +1,27 @@
 import React, {useState} from 'react';
+import {deleteDoc, doc} from "firebase/firestore";
+import {db} from '../firebase/firebase-config';
 import {AiFillMinusCircle, AiFillPlusCircle, AiTwotoneEdit} from "react-icons/ai";
 import {CgTab} from "react-icons/cg";
 import {FaPaperPlane} from "react-icons/fa";
+import {RiDeleteBin2Fill} from "react-icons/ri";
 import EditUrlPopover from '../EditUrlPopover/edit-url-popover';
+import DeleteUrlPopover from '../DeleteUrlPopover/delete-url-popover';
 
-const MyUrlCard = ({url, key, editSidebarActive, setEditSidebarActive, setUrlList, editPopoverRef}) => {
+const MyUrlCard = (props) => {
     const [expanded, setExpanded] = useState(false);
+    let {
+            url, 
+            key, 
+            editSidebarActive, 
+            setEditSidebarActive, 
+            setUrlList, 
+            editPopoverRef,
+            deletePopoverRef,
+            deletePopoverActive,
+            setDeletePopoverActive
+        } = props;
+    const urlsDocRef = doc(db, "urls", url.id);
 
     function handleExpand() {
         let previousState = expanded;
@@ -16,6 +32,10 @@ const MyUrlCard = ({url, key, editSidebarActive, setEditSidebarActive, setUrlLis
         setEditSidebarActive(true);
     }
 
+    function handleDeletePopover() {
+        setDeletePopoverActive(true);
+    }
+
     function handleNavigate() {
         window.location.href = url.longUrl;
     }
@@ -24,35 +44,54 @@ const MyUrlCard = ({url, key, editSidebarActive, setEditSidebarActive, setUrlLis
         window.open(url.longUrl, '_blank');
     }
 
-    let displayShortUrl = (!expanded && !url.prettyUrl) || expanded;
+    console.log({url})
 
     return (
         <>
             <div className="my-url-card" key={key}>
                 <div className="card-buttons-container">
-                    {!expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillPlusCircle /></button>}
-                    {expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillMinusCircle /></button>}
-                    <button type="button" onClick={handleEditSidebar} className="icon-button"><AiTwotoneEdit /></button>
-                    <EditUrlPopover id={url.id} editSidebarActive={editSidebarActive} setEditSidebarActive={setEditSidebarActive} setUrlList={setUrlList} editPopoverRef={editPopoverRef} />
-                    <button type="button" onClick={handleNavigate} className="icon-button"><FaPaperPlane />Go To URL</button>
-                    <button type="button" onClick={handleNewTab} className="icon-button"><CgTab />Open URL in New Tab</button>
+                    <div className="card-buttons-left">
+                        {!expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillPlusCircle size="1.5em"/></button>}
+                        {expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillMinusCircle size="1.5em"/></button>}
+                    </div>
+                    <div className="card-buttons-right">
+                        <button type="button" onClick={handleEditSidebar} className="icon-button"><AiTwotoneEdit size="1.5em"/>Edit Your URL</button>
+                        <EditUrlPopover 
+                            url={url} 
+                            editSidebarActive={editSidebarActive} 
+                            setEditSidebarActive={setEditSidebarActive} 
+                            setUrlList={setUrlList} 
+                            editPopoverRef={editPopoverRef} 
+                        />
+                        <button type="button" onClick={handleDeletePopover} className="icon-button"><RiDeleteBin2Fill size="1.5em"/>Delete This URL</button>
+                        <DeleteUrlPopover 
+                            url={url} 
+                            deletePopoverActive={deletePopoverActive} 
+                            setDeletePopoverActive={setDeletePopoverActive} 
+                            setUrlList={setUrlList} 
+                            deletePopoverRef={deletePopoverRef} 
+                        />
+                        <button type="button" onClick={handleNewTab} className="icon-button"><CgTab size="1.5em"/>Open URL in New Tab</button>
+                    </div>
                 </div>
-                {url.prettyUrl && <div className="my-url-card-type">
-                    <div className="my-url-card-header">Pretty Url</div>
-                    <a href={url.prettyUrl}>{url.prettyUrl}</a>
-                </div>}
-                {displayShortUrl && <div className="my-url-card-type">
-                    <div className="my-url-card-header">Short Url</div>
-                    <a href={url.shortUrl}>{url.shortUrl}</a>
-                </div>}
-                {expanded && <div className="my-url-card-type">
-                    <div className="my-url-card-header">Original Url</div>
-                    <a href={url.longUrl}>{url.longUrl}</a>
-                </div>}
-                {expanded && url.memo && <div className="my-url-card-type">
-                    <div className="my-url-card-header">Memo</div>
-                    <div>{url.memo}</div>
-                </div>}
+                <div className="card-body">
+                    {url.urlName && <div className="my-url-card-type">
+                        <div className="my-url-card-header">URL Name</div>
+                        <div>{url.urlName}</div>
+                    </div>}
+                    <div className="my-url-card-type">
+                        <div className="my-url-card-header">Short Url</div>
+                        <a href={url.longUrl}>{url.shortUrl}</a>
+                    </div>
+                    {expanded && <div className="my-url-card-type">
+                        <div className="my-url-card-header">Original Url</div>
+                        <a href={url.longUrl}>{url.longUrl}</a>
+                    </div>}
+                    {expanded && url.memo && <div className="my-url-card-type">
+                        <div className="my-url-card-header">Memo</div>
+                        <div>{url.memo}</div>
+                    </div>}
+                </div>
             </div>
         </>
     )
