@@ -4,9 +4,9 @@ import {db} from '../firebase/firebase-config';
 import {nanoid} from 'nanoid'
 import validateUrl from '../validate-url';
 import ErrorMessage from '../error-message';
-import './home-styles.css';
+import './add-url-styles.css';
 
-const Home = () => {
+const AddUrl = () => {
     const [newUrl, setNewUrl] = useState('');
     const [validationError, setvalidationError] = useState(false);
     const urlsCollectionRef = collection(db, "urls");
@@ -59,4 +59,4 @@ const Home = () => {
 
 }
 
-export default Home;
+export default AddUrl;

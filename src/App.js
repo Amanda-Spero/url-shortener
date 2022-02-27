@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {db} from './firebase/firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
-import Home from './Home/home';
+import AddUrl from './AddUrl/add-url';
 import MyUrls from './MyUrls/my-urls';
 import NavSidebar from './NavSidebar/nav-sidebar';
 import './App.css';
@@ -31,7 +31,7 @@ function App() {
       <NavSidebar />
       <BrowserRouter>
         <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<AddUrl />} />
             <Route path="/my-lists" element={<MyUrls urlList={urlList} setUrlList={setUrlList} />} />
         </Routes>
       </BrowserRouter>

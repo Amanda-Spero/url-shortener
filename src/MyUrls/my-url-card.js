@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {deleteDoc, doc} from "firebase/firestore";
+import {doc} from "firebase/firestore";
 import {db} from '../firebase/firebase-config';
 import {AiFillMinusCircle, AiFillPlusCircle, AiTwotoneEdit} from "react-icons/ai";
 import {CgTab} from "react-icons/cg";
-import {FaPaperPlane} from "react-icons/fa";
 import {RiDeleteBin2Fill} from "react-icons/ri";
 import EditUrlPopover from '../EditUrlPopover/edit-url-popover';
 import DeleteUrlPopover from '../DeleteUrlPopover/delete-url-popover';
