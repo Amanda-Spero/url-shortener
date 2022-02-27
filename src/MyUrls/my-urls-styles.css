@@ -1,24 +1,53 @@
 .my-urls-container {
     display: flex;
     flex-direction: column;
-    margin-left: 250px;
-    padding: 0px 10px;
-    width: 60%;
-}
+    width: 86%;
+    margin: auto;}
 
 .my-url-card {
-    width: 60%;
     margin: 10px auto;
     padding: 10px;
     border: black solid 2px;
     word-break: break-word;
+    width: 65%;
 }
 
 .my-url-card-type {
     margin: 10px;
 }
 
-.my-url-card-header {
+.my-url-card-type a {
     font-weight: bold;
+}
+
+.my-url-card-header {
     margin: 4px;
+    font-size: 1rem;    
+}
+
+.card-buttons-container {
+    display:flex;
+}
+
+.icon-button {
+    background: transparent;
+    border: none;
+}
+
+
+.overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }

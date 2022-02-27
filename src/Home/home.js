@@ -18,10 +18,10 @@ const Home = () => {
 
     let randomId;
     function createRandomId () {
-        randomId = nanoid(8)
+        randomId = nanoid(5)
     }
     
-    async function onSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         let isValid = validateUrl(newUrl);
         console.log(isValid)
@@ -29,11 +29,14 @@ const Home = () => {
             createRandomId();
             setvalidationError(false);
             await addDoc(urlsCollectionRef, {
+                id: randomId,
                 longUrl: newUrl,
-                shortUrl: `https://tiny.url/${randomId}`
+                shortUrl: `ittybittyurl/${randomId}`
             })
+            setNewUrl('');
         } else {
             setvalidationError(true);
+            alert('error')
         }
     }
 
@@ -47,7 +50,7 @@ const Home = () => {
             <form>
                 <h3>Enter url to shorten</h3>
                 <input type="text" id="url-input" value={newUrl} onChange={handleChange} />
-                <button type="submit" onClick={onSubmit}>Submit</button>
+                <button type="submit" onClick={handleSubmit}>Submit</button>
                 <button type="button" onClick={handleClear}>Clear</button>
             </form>
         </div>
