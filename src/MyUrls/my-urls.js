@@ -24,7 +24,7 @@ const MyUrls = ({urlList, setUrlList}) => {
 
     return (
         <>
-            <h3>My Urls</h3>
+            <h3>My Itty Bitty URLs</h3>
             <div className="my-urls-container">
                 {urlList && urlList.map((url) => {
                     return <MyUrlCard 

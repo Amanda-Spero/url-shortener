@@ -1,3 +1,8 @@
+.add-url-page {
+    width: 70%;
+    margin: auto;
+}
+
 .shorten-link-form {
     display: flex;
     flex-direction: column;

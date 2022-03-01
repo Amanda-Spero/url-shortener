@@ -50,11 +50,11 @@ const MyUrlCard = (props) => {
             <div className="my-url-card" key={key}>
                 <div className="card-buttons-container">
                     <div className="card-buttons-left">
-                        {!expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillPlusCircle size="1.5em"/></button>}
-                        {expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillMinusCircle size="1.5em"/></button>}
+                        {!expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillPlusCircle size="1.5em" focusable={false} /></button>}
+                        {expanded && <button type="button" className="icon-button" onClick={handleExpand}><AiFillMinusCircle size="1.5em"focusable={false} /></button>}
                     </div>
                     <div className="card-buttons-right">
-                        <button type="button" onClick={handleEditSidebar} className="icon-button"><AiTwotoneEdit size="1.5em"/>Edit Your URL</button>
+                        <button type="button" onClick={handleEditSidebar} className="icon-button"><AiTwotoneEdit size="1.5em"focusable={false} />Edit My URL</button>
                         <EditUrlPopover 
                             url={url} 
                             editSidebarActive={editSidebarActive} 
@@ -62,7 +62,7 @@ const MyUrlCard = (props) => {
                             setUrlList={setUrlList} 
                             editPopoverRef={editPopoverRef} 
                         />
-                        <button type="button" onClick={handleDeletePopover} className="icon-button"><RiDeleteBin2Fill size="1.5em"/>Delete This URL</button>
+                        <button type="button" onClick={handleDeletePopover} className="icon-button"><RiDeleteBin2Fill size="1.5em"focusable={false} />Delete This URL</button>
                         <DeleteUrlPopover 
                             url={url} 
                             deletePopoverActive={deletePopoverActive} 
@@ -70,7 +70,7 @@ const MyUrlCard = (props) => {
                             setUrlList={setUrlList} 
                             deletePopoverRef={deletePopoverRef} 
                         />
-                        <button type="button" onClick={handleNewTab} className="icon-button"><CgTab size="1.5em"/>Open URL in New Tab</button>
+                        <button type="button" onClick={handleNewTab} className="icon-button"><CgTab size="1.5em" focusable={false} />Open URL in New Tab</button>
                     </div>
                 </div>
                 <div className="card-body">

@@ -44,17 +44,17 @@ const AddUrl = () => {
     }
 
     return (
-        <>
-            <h3>Enter the URL to Shorten</h3>
+        <div className="add-url-page">
+            <h3>Create an Itty Bitty URL</h3>
                 <form className="shorten-link-form">
-                    <input type="text" value={newUrl} onChange={handleChange} />
+                    <input type="text" value={newUrl} onChange={handleChange} data-testid="add-input" />
                     <div className="shorten-button-container">
                         <button type="submit" onClick={handleSubmit}>Submit</button>
                         <button type="button" onClick={handleClear}>Clear</button>
                     </div>
                 </form>
                 {validationError && <ErrorMessage />}
-        </>
+        </div>
     )
 
 }
