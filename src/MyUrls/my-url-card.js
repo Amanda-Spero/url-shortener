@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {doc} from "firebase/firestore";
-import {db} from '../firebase/firebase-config';
+import {db} from '../firebase-config';
 import {AiFillMinusCircle, AiFillPlusCircle, AiTwotoneEdit} from "react-icons/ai";
 import {CgTab} from "react-icons/cg";
 import {RiDeleteBin2Fill} from "react-icons/ri";

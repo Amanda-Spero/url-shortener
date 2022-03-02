@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {doc, updateDoc} from "firebase/firestore";
-import {db} from '../firebase/firebase-config';
+import {db} from '../firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
 import {RiCloseLine} from "react-icons/ri";
 import './edit-url-popover-styles.css';

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {collection, addDoc} from 'firebase/firestore';
-import {db} from '../firebase/firebase-config';
+import {db} from '../firebase-config';
 import {nanoid} from 'nanoid'
 import validateUrl from '../validate-url';
 import ErrorMessage from '../error-message';

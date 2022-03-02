@@ -1,6 +1,6 @@
 import React from 'react';
 import {doc, deleteDoc} from "firebase/firestore";
-import {db} from '../firebase/firebase-config';
+import {db} from '../firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
 import {RiCloseLine} from "react-icons/ri";
 import './delete-url-popover-styles.css';
