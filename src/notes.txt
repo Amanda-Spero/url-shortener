@@ -1,0 +1,8 @@
+To run program:
+    Inside command line run:
+        'npm install'
+        'npm run start'
+
+To run unit tests:
+    Inside command line run:
+        'npm run test'
